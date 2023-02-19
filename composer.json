@@ -1,0 +1,19 @@
+{
+    "name": "geokongo/wp-bulk-create",
+    "description": "This WordPress plugin enables you to create and publish posts and pages in bulk from a predefined list of page titles and slugs.",
+    "type": "plugin",
+    "license": "MIT",
+    "autoload": {
+        "psr-4": {
+            "Geokongo\\WpBulkCreate\\": "includes/"
+        }
+    },
+    "authors": [
+        {
+            "name": "Geoffrey Okongo",
+            "email": "code@geokongo.com"
+        }
+    ],
+    "minimum-stability": "dev",
+    "require": {}
+}
