@@ -44,8 +44,16 @@ function bulkcreate_deactivate(){
     Geokongo\BulkCreate\Deactivate::deactivate();
 }
 
+/**
+ * The code that runs during plugin uninstall
+ */
+function bulkcreate_uninstall(){
+    Geokongo\BulkCreate\Uninstall::uninstall();
+}
+
 register_activation_hook(__FILE__, 'bulkcreate_activate');
 register_deactivation_hook(__FILE__, 'bulkcreate_deactivate');
+register_uninstall_hook(__FILE__, 'bulkcreate_uninstall');
 
 /**
  * Initialize all the core classes of the plugin
