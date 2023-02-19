@@ -30,3 +30,27 @@ defined('ABSPATH') or die;
 if(file_exists(dirname(__FILE__) . '/vendor/autoload.php')){ 
     require_once dirname(__FILE__) . '/vendor/autoload.php';
 }
+
+/**
+ * The code that runs during plugin activation
+ */
+function activate_bulkcreate(){
+    Geokongo\BulkCreate\Activate::activate();
+}
+
+/**
+ * The code that runs during plugin deactivation
+ */
+function deactivate_bulkcreate(){
+    Geokongo\BulkCreate\Deactivate::deactivate();
+}
+
+register_activation_hook(__FILE__, 'activate_bulkcreate');
+register_deactivation_hook(__FILE__, 'deactivate_bulkcreate');
+
+/**
+ * Initialize all the core classes of the plugin
+ */
+if(class_exists('Geokongo\BulkCreate\Init')){
+    Geokongo\BulkCreate\Init::register_services();
+}
