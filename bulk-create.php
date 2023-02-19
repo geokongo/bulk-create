@@ -22,3 +22,11 @@ is furnished to do so.
 
 Copyright (c) 2020-2023 Geoffrey Okongo
 */
+
+//If this file is called directly, abort!
+defined('ABSPATH') or die;
+
+//Require the composer autoload file once
+if(file_exists(dirname(__FILE__) . '/vendor/autoload.php')){ 
+    require_once dirname(__FILE__) . '/vendor/autoload.php';
+}
