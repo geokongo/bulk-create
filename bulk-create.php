@@ -8,7 +8,7 @@
  * @license           GPL-2.0-or-later
  *
  * @wordpress-plugin
- * Plugin Name:       Bulk Create
+ * Plugin Name:       GO Bulk Create
  * Plugin URI:        https://github.com/geokongo/bulk-create
  * Description:       This plugin will help you create and publish WordPress pages and post in bulk. You can do this from a list of page titles and URL slugs that you can copy directly into the plugin admin area.
  * Version:           1.0.0
@@ -34,21 +34,21 @@ if(file_exists(dirname(__FILE__) . '/vendor/autoload.php')){
  * The code that runs during plugin activation
  */
 function bulkcreate_activate(){
-    Geokongo\BulkCreate\Activate::activate();
+    flush_rewrite_rules();
 }
 
 /**
  * The code that runs during plugin deactivation
  */
 function bulkcreate_deactivate(){
-    Geokongo\BulkCreate\Deactivate::deactivate();
+    flush_rewrite_rules();
 }
 
 /**
  * The code that runs during plugin uninstall
  */
 function bulkcreate_uninstall(){
-    Geokongo\BulkCreate\Uninstall::uninstall();
+    
 }
 
 register_activation_hook(__FILE__, 'bulkcreate_activate');
