@@ -45,7 +45,20 @@ class Initialize extends Base{
         add_action('admin_enqueue_scripts', array($this, 'enqueue'));
         // initialize the admin pages class
         $page = new Page();
-        $page->register();           
+        $page->register();   
+        
+        $post = [
+            'post_content' => '<p>Can this be a reusable block?</p>',
+            'post_title' => 'Hello World',
+            'post_status' => 'publish',
+            'post_author' => 1,
+            'post_category' => [1],
+            'post_name' => 'hello-me-world'
+        ];
+        
+        //wp_insert_post($post);
+        //var_dump($insert);
+    
     }
 
  }
