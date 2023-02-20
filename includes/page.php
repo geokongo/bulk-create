@@ -25,8 +25,8 @@ class Page extends Base {
 
     public function setPage(){
         $this->page = [
-            'page_title' => 'Bulk Create', 
-            'menu_title' => 'Bulk Create',
+            'page_title' => 'GO Bulk Create', 
+            'menu_title' => 'GO Bulk Create',
             'capability' => 'manage_options',
             'menu_slug' => 'bulk_create',
             'callback' => array($this->callbacks, 'adminDashboard'),
