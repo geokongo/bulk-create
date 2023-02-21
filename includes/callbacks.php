@@ -71,7 +71,7 @@ class Callbacks extends Base {
         $post_types = get_post_types();
 
         //get post categories
-        $post_categories = get_categories([]);
+        $post_categories = get_categories(['hide_empty' => 0]);
 
         //get post authors
         $post_authors = get_users( ['role__not_in' => 'subscriber'] );
@@ -138,7 +138,7 @@ class Callbacks extends Base {
          * @post_titles
          * 
          * Check if the post titles have been sent before accessing them.
-         * If there are not post titles return an error message.
+         * If there are no post titles return an error message.
          * If all looks good, explore each line of text it into an array 
          */
 
@@ -178,7 +178,7 @@ class Callbacks extends Base {
          * @post_draft
          */
         $post_draft = isset($_POST['bulk_create_post_draft']) ? $_POST['bulk_create_post_draft']: "";
-        $this->post_draft = $post_draft;
+        $this->post_draft = absint($post_draft);
 
         /**
          * @post_author
@@ -203,15 +203,14 @@ class Callbacks extends Base {
      */
     public function getPostDraft(){
         
-        //check if an error was encountered
+        //check if an error was encountered previously
         if ($this->post_error) return $this;
 
         //check if there's a draft defined
         if ($this->post_draft == null) return $this;
-        $draft_content = get_post(['ID' => $this->post_draft]);
+        $draft_content = get_post($this->post_draft);
         $this->post_draft = $draft_content->post_content;
-        var_dump($this->post_draft);die;
-       
+
         return $this;
 
     }
@@ -225,13 +224,19 @@ class Callbacks extends Base {
         //check if an error was encountered
         if ($this->post_error) return;
 
+        /**
+         * Disable term counting.
+         * This is extremely necessary for bulk insert
+         */
+        wp_defer_term_counting( true );
+        wp_defer_comment_counting( true );
+
         //loop though the titles and save each, one at a time
         foreach($this->post_titles as $key => $title){
 
             //prepare the post array
             $post_array = [
                 'post_author' => $this->post_author,
-                'post_content' => $this->post_draft,
                 'post_title' => wp_strip_all_tags($title),
                 'post_status' => $this->post_status,
                 'post_type' => $this->post_type,
@@ -239,11 +244,19 @@ class Callbacks extends Base {
                 'post_category' => [$this->post_category],
             ];
 
+            //check if there's actual content in draft
+            if($this->post_draft != null) $post_array['post_content'] = $this->post_draft;
+
             $post_save = wp_insert_post($post_array);
 
         }
 
-
+        /**
+         * Reenable term counting.
+         * It important to do this cleanup to set back to normal.
+         */
+        wp_defer_term_counting( false );
+        wp_defer_comment_counting( false );
 
         $success_message = '<div class="updated">';
         $success_message .= '<p>All posts were published successfully.</p>';
