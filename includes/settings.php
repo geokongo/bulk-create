@@ -4,7 +4,7 @@
  * Define the plugin settings
  */
 
-namespace Geokongo\BulkCreate;
+ namespace GOBulkCreate;
 
 class Settings{
 

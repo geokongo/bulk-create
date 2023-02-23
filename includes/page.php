@@ -4,7 +4,7 @@
  * Set the admin pages
  */
 
-namespace Geokongo\BulkCreate;
+ namespace GOBulkCreate;
 
 class Page extends Base {
 

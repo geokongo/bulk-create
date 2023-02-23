@@ -2,7 +2,7 @@
 /**
  * @package Bulk Create
  */
-namespace Geokongo\BulkCreate;
+namespace GOBulkCreate;
 
 class Base{
 

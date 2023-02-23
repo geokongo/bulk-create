@@ -4,7 +4,7 @@
  * Contains all callback methods to help with handling plugin features
  */
 
-namespace Geokongo\BulkCreate;
+ namespace GOBulkCreate;
 
 class Callbacks extends Base {
 
