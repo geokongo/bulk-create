@@ -25,10 +25,27 @@
 //If this file is called directly, abort!
 defined('ABSPATH') or die;
 
-//Require the composer autoload file once
-if(file_exists(dirname(__FILE__) . '/vendor/autoload.php')){ 
-    require_once dirname(__FILE__) . '/vendor/autoload.php';
-}
+//autloader for loading plugin class files
+spl_autoload_register(function($class){
+    
+    //define the plugin namespace
+	$namespace = 'GOBulkCreate';
+
+    //check if the class belongs to this namespace
+	if (strpos($class, $namespace) !== 0) {
+		return;
+	}
+
+    $class = str_replace($namespace, 'includes', $class);
+	$class = str_replace('\\', DIRECTORY_SEPARATOR, strtolower($class) . '.php');
+ 	$class_path = __DIR__ . DIRECTORY_SEPARATOR . $class;
+    
+    //check if file exists before autoloading
+	if (file_exists($class_path)) {
+		require_once($class_path);
+	}
+
+});
 
 /**
  * The code that runs during plugin activation
@@ -44,21 +61,14 @@ function bulkcreate_deactivate(){
     flush_rewrite_rules();
 }
 
-/**
- * The code that runs during plugin uninstall
- */
-function bulkcreate_uninstall(){
-    
-}
-
 register_activation_hook(__FILE__, 'bulkcreate_activate');
 register_deactivation_hook(__FILE__, 'bulkcreate_deactivate');
-register_uninstall_hook(__FILE__, 'bulkcreate_uninstall');
 
 /**
  * Initialize all the core classes of the plugin
  */
-if(class_exists('Geokongo\BulkCreate\Initialize')){
-    $bulkcreate = new Geokongo\BulkCreate\Initialize();
+if(class_exists('GOBulkCreate\Initialize')){
+    $bulkcreate = new GOBulkCreate\Initialize();
     $bulkcreate->start();
 }
+
