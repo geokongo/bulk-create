@@ -16,5 +16,4 @@ class Base{
         $this->plugin = plugin_basename(dirname(__FILE__, 2)) . '/go-bulk-create.php';
     }
 
-
 }
