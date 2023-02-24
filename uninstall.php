@@ -1,11 +1,6 @@
 <?php
 /**
- * @package Bulk Create
+ * @package Go Bulk Create
  */
 
-if(!defined('WP_UNINSTALL_PLUGIN')) {
-    die;
-}
-
-$option_name = 'bulk_create_option';
-delete_option( $option_name );   
+defined('WP_UNINSTALL_PLUGIN') or die;
