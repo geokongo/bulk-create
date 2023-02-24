@@ -27,7 +27,7 @@ class Init extends Base{
      */
     public function settingsLink($links){
         
-        $link = '<a href="admin.php?page=go-bulk-create">Settings</a>';
+        $link = '<a href="admin.php?page=' . $this->plugin_slug . '">Settings</a>';
         array_push($links, $link);
         return $links;
 

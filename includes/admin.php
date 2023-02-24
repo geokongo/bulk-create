@@ -38,7 +38,7 @@ class Admin extends Base{
             'GO Bulk Create', 
             'GO Bulk Create',
             'manage_options',
-            'go-bulk-create',
+            $this->plugin_slug,
             [$this, 'dashboard'],
             'dashicons-block-default',
             70,
