@@ -40,7 +40,7 @@ class Admin extends Base{
             'manage_options',
             'go-bulk-create',
             [$this, 'dashboard'],
-            'dashicons-store',
+            'dashicons-block-default',
             70,
         );
     }
